@@ -63,7 +63,7 @@ $$
 
 Pseudo-code for `lep2` would look like this : 
 
-```pseudocode
+```python
 def lep2(ui32: x):    
     x = x or x right-shifted by 1
     x = x or x right-shifted by 2
@@ -78,7 +78,7 @@ def lep2(ui32: x):
 
 In the first 5 operations of the function we will replace any `0` into `1` in the first `k` bits from the right.
 
-```pseudocode
+```python
 Eg. 
 x = 9 = 00000000000000000000000000001001
 
@@ -129,7 +129,7 @@ $$
 $$
 so we **XOR** modified `x` with its **right-shifted** by 1 copy:
 
-```pseudocode
+```python
 ...
 6. return x xor x right-shifted by 1
 
@@ -158,7 +158,7 @@ To recap with function `lep2` we first set all bits from the right to **k-th** t
 
 Pseudo-code for `hep2` would look like this : 
 
- ```pseudocode
+ ```python
 def hep2(ui32: x):
 	x = x - 1
 	x = x and x right-shifted by 1
@@ -174,7 +174,7 @@ def hep2(ui32: x):
 
 In the first operation we subtract `1` from x. 
 
-```pseudocode
+```python
 Eg.
 x = 9 = 00000000000000000000000000001001
 
@@ -191,7 +191,7 @@ Operation 1
 
 In the next 5 operations of the function we will replace any `0` into `1` in the first `k` bits from the right just like in `lep2`.
 
-```pseudocode
+```python
 ...
 2.    x = x or x right-shifted by 1
 3.    x = x or x right-shifted by 2
@@ -240,7 +240,7 @@ x \geq 2^k-1
 $$
 so we just add `1` to x:
 
-```pseudocode
+```python
 ...
 6. return x + 1
 
