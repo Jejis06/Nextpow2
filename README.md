@@ -308,3 +308,5 @@ int hep2(unsigned int x){
 
 
 fin.
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
