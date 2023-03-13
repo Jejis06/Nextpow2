@@ -1,5 +1,5 @@
 
-<h1 style="text-align: center;">(Nextpow2) Rounding to the next power of 2 </h1>
+# (Nextpow2) Rounding to the next power of 2 
 
 
 
@@ -9,7 +9,7 @@ Out of boredom I started thinking about ways of finding the first lower or equal
 
 
 
-<h1 style="text-align: center;"> The Idea </h1>
+# The Idea
 
 
 
@@ -23,7 +23,11 @@ none&x<0 \\
 
 and 
 
-$$hep2(x)=\begin{Bmatrix}none&x<0 \\ 0&x=0 \\ 2^{\left\lceil\log_2x\right\rceil}&x>0 \\ \end{Bmatrix}$$
+$$hep2(x) = \begin{Bmatrix}
+none&x<0 \\ 
+0&x=0 \\ 
+2^{\left\lceil\log_2x\right\rceil}&x>0 \\ 
+\end{Bmatrix}$$
 
 Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the logarithm. Fortunately we have one trick that will let us calculate `lep2` and `hep2` in constant time.
 
@@ -31,7 +35,7 @@ Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the log
 
 
 
- <h1 style="text-align: center;"> Algorithm </h1>
+# Algorithm 
 
 
 
@@ -49,7 +53,7 @@ $$\large \begin{matrix}lep2(x) = 2^{bitsize - lnz(x)} && hep2(x) = 2^{bitsize - 
 
 
 
- <h1 style="text-align: center;"> Lep2 implementation </h1>
+# Lep2 implementation 
 
 
 
@@ -144,7 +148,7 @@ To recap with function `lep2` we first set all bits from the right to **k-th** t
 
 
 
-<h1 style="text-align: center;"> Hep2 implementation </h1>
+# Hep2 implementation 
 
 
 
@@ -257,7 +261,7 @@ $$x + 1\geq 2^k$$
 
 
 
-<h1 style="text-align: center;"> C++ Code </h1>
+# C++ Code
 
 
 
@@ -265,7 +269,7 @@ Here are both functions written in c++:
 
 
 
-# [Lep2.cpp](./lep2.cpp)
+## [Lep2.cpp](./lep2.cpp)
 ```c++
 int lep2(unsigned int x){
 	x |= (x >> 1);
@@ -278,7 +282,7 @@ int lep2(unsigned int x){
 }
 ```
 
-# [Hep2.cpp](./hep2.cpp)
+## [Hep2.cpp](./hep2.cpp)
 
 ```c++
 int hep2(unsigned int x){
