@@ -15,11 +15,11 @@ Out of boredom I started thinking about ways of finding the first lower or equal
 
 Let's name the lower or equal power of 2 `lep2` and higher or equal power of 2 `hep2` then:
 
-$$llep2(x)=\begin{Bmatrix}none&x<0\\0&x=0\\2^{\left\lfloor\log_2x\right\rfloor}&x>0\\ \end{Bmatrix}$$
+$$lep2(x)=\begin{Bmatrix}none&x<0 \\ 0&x=0 \\ 2^{\left\lfloor\log_2x\right\rfloor}&x>0 \\ \end{Bmatrix}$$
 
 and 
 
-$$hep2(x)=\begin{Bmatrix}none&x<0\\0&x=0\\;2^{\left\lceil\log_2x\right\rceil}&x>0\\ \end{Bmatrix}$$
+$$hep2(x)=\begin{Bmatrix}none&x<0 \\ 0&x=0 \\ 2^{\left\lceil\log_2x\right\rceil}&x>0 \\ \end{Bmatrix}$$
 
 Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the logarithm. Fortunately we have one trick that will let us calculate `lep2` and `hep2` in constant time.
 
