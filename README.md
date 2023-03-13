@@ -1,6 +1,4 @@
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
 <h1 style="text-align: center;">(Nextpow2) Rounding to the next power of 2 </h1>
 
 
