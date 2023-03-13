@@ -3,17 +3,7 @@
 
 
 
-Out of boredom I started thinking about ways of finding the first lower or equal power of 2 for a given x. For example if x = 10 than that number would be 8 because 2^3 is the last power of 2 that is smaller or equal from it. Than I started thinking about the first higher or equal power for a given x. I was wondering if there is a way to compute both of those functions faster than a loop.
-
-
-
-
-
-# The Idea
-
-
-
-Let's name the lower or equal power of 2 `lep2` and higher or equal power of 2 `hep2` then:
+Let's consider having two functions. For a given $x$  `lep2` will give us the closest lower or equal power of 2 to it. Similarly `hep2` will give the closest higher or equal power of 2 to that $x$. Both functions can be defined:
 
 $$lep2(x) = \begin{Bmatrix}
 none&x<0 \\
@@ -31,29 +21,27 @@ none&x<0 \\
 
 Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the logarithm. Fortunately we have one trick that will let us calculate `lep2` and `hep2` in constant time.
 
+<br />
+<br />
+
+## Algorithm 
 
 
 
-
-# Algorithm 
-
-
-
-Lets consider that in our program we use `32-bit unsigned integer` x for which we want to find  `lep2` and `hep2` (`unsigned` because  any negative number would be thrown out by both functions so we don't need it and for the next step we would need all the bits). 
+Lets consider that in our program we use `32-bit unsigned integer` `x` for which we want to find the output of  `lep2` and `hep2` (`unsigned` because  any negative number would be thrown out by both functions so we don't need it and for the next step we would need all the bits). 
 
 Let `x` be equal to 9. If we look at it its binary form we see `00000000000000000000000000001001`. If we know the leading number of zeros `lnz` (in the case of 9 its 28) we can subtract it from the total number of bits which we chose to be 32. The number we get is $k$ where (in our example $k = 32 - 28 = 4$) :
 
 $$2^k \leq x$$
 
-So `lep2` and `hep2 ` can be written as:
+So `lep2` and `hep2` can be written as:
 
-$$\large \begin{matrix}lep2(x) = 2^{bitsize - lnz(x)} && hep2(x) = 2^{bitsize - lnz(x) + 1}\end{matrix} $$
+$$\large \begin{matrix}lep2(x) = 2^{bitsize - lnz(x)} && hep2(x) = 2^{bitsize - lnz(x-1) + 1}\end{matrix} $$
 
+<br />
+<br />
 
-
-
-
-# Lep2 implementation 
+## Lep2 implementation 
 
 
 
@@ -146,9 +134,10 @@ To recap with function `lep2` we first set all bits from the right to **k-th** t
 
 
 
+<br />
+<br />
 
-
-# Hep2 implementation 
+## Hep2 implementation 
 
 
 
@@ -232,7 +221,9 @@ or 	00000000000000000000000000000000
 
 After operations **(1 - 6)**:
 
-$$x \geq 2^k-1$$
+$$x = 2^k-1$$ 
+
+where $2^k$ is $\geq$ than the `x` at the start
 
 so we just add `1` to x:
 
@@ -255,13 +246,14 @@ return 00000000000000000000000000010000 = 16
 
 To recap with function `hep2` we first subtract `1` from it and than set all bits from the right to **k-th** to `1`. Than we add `1` which makes :
 
-$$x + 1\geq 2^k$$
+$$x = 2^k$$
 
+where $2^k$ is $\geq$ than the initial `x`
 
+<br />
+<br />
 
-
-
-# C++ Code
+## C++ Code
 
 
 
@@ -269,7 +261,7 @@ Here are both functions written in c++:
 
 
 
-## [Lep2.cpp](./lep2.cpp)
+### [Lep2.cpp](./lep2.cpp)
 ```c++
 int lep2(unsigned int x){
 	x |= (x >> 1);
@@ -282,7 +274,7 @@ int lep2(unsigned int x){
 }
 ```
 
-## [Hep2.cpp](./hep2.cpp)
+### [Hep2.cpp](./hep2.cpp)
 
 ```c++
 int hep2(unsigned int x){
@@ -296,9 +288,8 @@ int hep2(unsigned int x){
 }
 ```
 
-
-
-
+<br />
+<br />
 
 fin.
 
