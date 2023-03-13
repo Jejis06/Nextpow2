@@ -14,21 +14,13 @@ Out of boredom I started thinking about ways of finding the first lower or equal
 
 
 Let's name the lower or equal power of 2 `lep2` and higher or equal power of 2 `hep2` then:
-$$
-lep2(x) = \begin{Bmatrix}
-  none & x < 0 \\
- 0 &  x = 0\\
-  2^{\left\lfloor\log_2x\right\rfloor}  & x > 0 \\
-\end{Bmatrix}
-$$
+
+$$lep2(x) = \begin{Bmatrix}  none & x < 0 \\ 0 &  x = 0\\  2^{\left\lfloor\log_2x\right\rfloor}  & x > 0 \\ \end{Bmatrix}$$
+
 and 
-$$
-hep2(x) = \begin{Bmatrix}
-  none & x < 0 \\
- 0 &  x = 0\\
-  2^{\left\lceil\log_2x\right\rceil}  & x > 0 \\
-\end{Bmatrix}
-$$
+
+$$hep2(x) = \begin{Bmatrix}  none & x < 0 \\ 0 &  x = 0\\  2^{\left\lceil\log_2x\right\rceil}  & x > 0 \\ \end{Bmatrix} $$
+
 Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the logarithm. Fortunately we have one trick that will let us calculate `lep2` and `hep2` in constant time.
 
 
@@ -42,16 +34,12 @@ Calculating $2^{\left\lceil\log_2x\right\rceil}$ is expensive because of the log
 Lets consider that in our program we use `32-bit unsigned integer` x for which we want to find  `lep2` and `hep2` (`unsigned` because  any negative number would be thrown out by both functions so we don't need it and for the next step we would need all the bits). 
 
 Let `x` be equal to 9. If we look at it its binary form we see `00000000000000000000000000001001`. If we know the leading number of zeros `lnz` (in the case of 9 its 28) we can subtract it from the total number of bits which we chose to be 32. The number we get is $k$ where (in our example $k = 32 - 28 = 4$) :
-$$
-2^k \leq x
-$$
+
+$$2^k \leq x$$
+
 So `lep2` and `hep2 ` can be written as:
-$$
-\large \begin{matrix}
-lep2(x) = 2^{bitsize - lnz(x)} &&
-hep2(x) = 2^{bitsize - lnz(x) + 1}
-\end{matrix}
-$$
+
+$$\large \begin{matrix}lep2(x) = 2^{bitsize - lnz(x)} && hep2(x) = 2^{bitsize - lnz(x) + 1}\end{matrix} $$
 
 
 
@@ -124,9 +112,9 @@ or 	00000000000000000000000000000000
 
 
 For the last operation where the function returns the result we need to extract:
-$$
-2^k
-$$
+
+$$2^k$$
+
 so we **XOR** modified `x` with its **right-shifted** by 1 copy:
 
 ```python
@@ -235,9 +223,9 @@ or 	00000000000000000000000000000000
 
 
 After operations **(1 - 6)**:
-$$
-x \geq 2^k-1
-$$
+
+$$x \geq 2^k-1$$
+
 so we just add `1` to x:
 
 ```python
@@ -258,9 +246,8 @@ return 00000000000000000000000000010000 = 16
 `closest higher or eqal power of 2 for 9 is 16`
 
 To recap with function `hep2` we first subtract `1` from it and than set all bits from the right to **k-th** to `1`. Than we add `1` which makes :
-$$
-x + 1\geq 2^k
-$$
+
+$$x + 1\geq 2^k$$
 
 
 
